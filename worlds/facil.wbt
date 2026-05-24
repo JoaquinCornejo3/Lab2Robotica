@@ -1,0 +1,97 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.3870193546349494 -0.33701107077507014 0.8582770865594558 4.454817929796847
+  position 0.22314430164502502 0.668693526734148 0.5124095977881398
+}
+TexturedBackground {
+}
+E-puck {
+  translation -0.0145924 0.223551 -0.0500642
+  rotation -4.5562643327244365e-06 3.524965007242326e-07 0.9999999999895581 -3.114555267877757
+  controller "labone"
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0 0 -0.05
+}
+Solid {
+  translation -0.04 0.08 -0.000402039
+  rotation 0.30446670114402 0.5219429162468856 0.7967908257969432 9.80166132775491e-17
+  children [
+    DEF cajita Shape {
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  boundingObject USE cajita
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.06 0.08 -0.000402039
+  rotation 0.30446670114402 0.5219429162468856 0.7967908257969432 9.80166132775491e-17
+  children [
+    DEF cajita Shape {
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  name "solid(4)"
+  boundingObject USE cajita
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.04 0.38 -0.000402039
+  children [
+    DEF cajita Shape {
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  name "solid(1)"
+  boundingObject USE cajita
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.06 0.38 -0.000402039
+  children [
+    DEF cajita Shape {
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  name "solid(3)"
+  boundingObject USE cajita
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.14 0.23 -0.000402039
+  rotation 0.30446670114402 0.5219429162468856 0.7967908257969432 9.80166132775491e-17
+  children [
+    DEF cajita Shape {
+      geometry Box {
+        size 0.1 0.4 0.1
+      }
+    }
+  ]
+  name "solid(2)"
+  boundingObject USE cajita
+  physics Physics {
+  }
+}
