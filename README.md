@@ -29,7 +29,11 @@ Se utiliza el robot diferencial **E-puck** equipado con:
 * **Encoders:** Sensores habilitados en las ruedas izquierda (`left wheel sensor`) y derecha (`right wheel sensor`) para registrar la rotación de los motores.
 
 ## Frecuencia de Muestreo
-bla bla bla
+Durante la simulación, las lecturas de los sensores de distancia y de los encoders de las ruedas se registraron de forma estrictamente síncrona con el paso de simulación del entorno Webots.
+
+* **Tiempo de muestreo ($T_{s}$):** 0.032 s (32 ms), extraído dinámicamente mediante la función `getBasicTimeStep()`
+* **Frecuencia de muestreo ($f_{s}$):** 31.25 Hz, calculada a partir de la relación $f_{s}=\frac{1}{T_{s}}$
+* **Cantidad de muestras registradas:** El experimento se acotó a un registro de 1500 muestras finitas, lo que equivale a una ventana de observación de 48.0 segundos de navegación ininterrumpida.
 
 ## Análisis de Señales y Estimación de Avance
 bla bla bla
