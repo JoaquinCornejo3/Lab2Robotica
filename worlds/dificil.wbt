@@ -8,8 +8,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/project
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.7207504772560299 0.5139603810693695 0.4651488753358795 2.516713946919882
-  position -0.4654676328510855 1.051021739378257 2.16377458711902
+  orientation -0.5762025981776118 0.5838807784130009 0.57190366536087 2.1106770747488284
+  position 0.02312869621624476 0.12367097195893868 2.5335202616765797
 }
 TexturedBackground {
 }
@@ -64,7 +64,7 @@ Solid {
   }
 }
 Solid {
-  translation -0.07 0.31 0
+  translation -0.02 0.29 0
   rotation 0 0 1 1.01503e-06
   children [
     DEF pared_sup_izq Shape {
@@ -74,7 +74,7 @@ Solid {
         }
       }
       geometry Box {
-        size 0.3 0.07 0.1
+        size 0.4 0.05 0.1
       }
     }
   ]
