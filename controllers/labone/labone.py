@@ -109,7 +109,7 @@ AnguloObjetivoPeligro = math.pi / 3    # ~60°
 # ════════════════════════════════════════════════════════════════
 
 Q_kalman = 0.0001
-R_kalman = 0.0020
+R_kalman = 0.0015
 
 d_kalman = 0.10
 P_kalman = 1.0
