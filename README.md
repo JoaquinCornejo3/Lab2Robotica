@@ -17,10 +17,34 @@ estimar la distancia frontal a obstáculos y mejorar la toma de decisiones.
 **Curso:** (ICI450-2) Robotica y sistemas autonomos.
 
 **Paralelo:** 2
+## Instrucciones de Ejecución
+1.  Clonar este repositorio y abrir Webots.
+2.  Cargar el mundo deseado (`facil.wbt`, `laboratorio2.wbt` o `dificil.wbt`) desde la interfaz.
+3.  Asegurar que el E-puck tenga asignado el controlador `labone.py`.
+4.  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA.
 
+## Descripción del Robot y Sensores
+Se utiliza el robot diferencial **E-puck** equipado con:
+* **Sensores de Proximidad:** 8 sensores infrarrojos (`ps0` a `ps7`) para percibir obstáculos. Se agrupan lógicamente en cuadrantes (frontal, diagonal, lateral, trasero) para evaluar amenazas.
+* **Encoders:** Sensores habilitados en las ruedas izquierda (`left wheel sensor`) y derecha (`right wheel sensor`) para registrar la rotación de los motores.
 
+## Frecuencia de Muestreo
+bla bla bla
 
+## Análisis de Señales y Estimación de Avance
+bla bla bla
 
+## Filtrado y Fusión Sensorial (Filtro de Kalman)
+bla bla bla
+
+## Lógica de Navegación Reactiva
+bla bla bla
+
+## Escenarios de Prueba y Resultados
+bla bla bla
+
+## Conclusiones
+bla bla bla
 
 *(BORRAR) lo de abajo*
 
