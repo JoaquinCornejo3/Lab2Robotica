@@ -9,9 +9,14 @@ estimar la distancia frontal a obstáculos y mejorar la toma de decisiones.
 ## Datos 
 **Universidad:** Pontificia Universidad Católica de Valparaíso
 
-**Curso y paralelo:** (ICI4150-2) Robótica y sistemas autónomos.
+### Integrantes:
+1. Joaquín Cornejo Fernández.
+2. Vicente Martinez Estay.
+3. Darío Fuentes Ponce.
 
-**Integrantes:** Joaquín Antonio Cornejo Fernández, Vicente Miguel Martinez Estay, Dario Joaquin Fuentes Ponce.
+**Curso:** (ICI450-2) Robotica y sistemas autonomos.
+
+**Paralelo:** 2
 
 
 
