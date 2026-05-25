@@ -62,7 +62,7 @@ El filtro deKalman estima la distancia frontal al obstáculo más cercano, fusio
 - Medición: `z_k = min(DistFD_ema, DistFI_ema)` que seria la menor distancia detectada por los sensores frontales filtrados.
 
 #### Etapa de Predicción (Actualización de Tiempo):
-El obstáculo se acerca en proporción al avance del robot. La distancia se limita entre 0 y 0.10 m.
+En esta etapa, el filtro "predice" cómo cambió la distancia basándose únicamente en el movimiento del robot. Como el robot avanza (AvanceLineal), se asume que el obstáculo se acerca en esa misma proporción. Simultáneamente, la incertidumbre del sistema (P_pred) aumenta debido al ruido natural del movimiento (Q_kalman). La distancia se limita estrictamente entre 0 y 0.10 m.
 
 ```
 DeltaD_k = -AvanceLineal
@@ -70,14 +70,17 @@ d_pred = d_kalman + DeltaD_k
 d_pred = max(0.0, min(d_pred, 0.10))
 P_pred = P_kalman + Q_kalman
 ```
-luego a considerar, la ganancia de kalman se define como `K_k = P_pred / (P_pred + R_kalman)`.
+Luego se calcul la ganancia de kalman, que se define como `K_k = P_pred / (P_pred + R_kalman)`.
 
 #### Etapa de Corrección (Actualización de Medición):
+En esta etapa, la predicción anterior se corrige utilizando la lectura real del sensor . Si el sensor es muy ruidoso, el filtro confiará más en la predicción; si la predicción es incierta, confiará más en el sensor. Finalmente, la incertidumbre se reduce tras incorporar el nuevo dato.
 ```
 d_kalman = d_pred + K_k * (z_k - d_pred)
 d_kalman = max(0.0, min(d_kalman, 0.10))
 P_kalman = (1.0 - K_k) * P_pred
 ```
+Para el ajuste y sintonización de este filtro, se definieron los siguientes parámetros fijos de inicialización e incertidumbre:
+
 | Parámetro | Valor | Significado|
 | :--- | :---: | ---: |
 Q_kalman | 0.0001| Ruido de proceso (muy baja incertidumbre en la odometría).
