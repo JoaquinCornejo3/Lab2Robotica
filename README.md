@@ -31,7 +31,7 @@ Durante la simulación, las lecturas de los sensores de distancia y de los encod
 * **Cantidad de muestras registradas:** El experimento registró un total de 1031 muestras, lo que equivale a una ventana de observación de 33.0 segundos de navegación ininterrumpida.
 
 ## Análisis de Señales y Estimación de Avance
-Los sensores frontales (ps0, ps7) muestran un valor de ruido de fondo de entre 60 y 80 unidades cuando no hay obstáculos. Cuando el robot se aproxima a una pared, los valores aumentan rápidamente, superando las 700 unidades en colisiones inminentes. Debido a que la respuesta del sensor IR no es lineal, interpretar directamente los valores crudos puede llevar a decisiones poco precisas. Por eso, en el código esos valores se transforman a metros (con un límite util de 0.10 m).
+Los sensores frontales (`ps0, ps7`) muestran un valor de ruido de fondo de entre 60 y 80 unidades cuando no hay obstáculos. Cuando el robot se aproxima a una pared, los valores aumentan rápidamente, superando las 700 unidades en colisiones inminentes. Debido a que la respuesta del sensor IR no es lineal, interpretar directamente los valores crudos puede llevar a decisiones poco precisas. Por eso, en el código esos valores se transforman a metros (con un límite util de 0.10 m).
 
 #### Odometría con encoders
 El desplazamiento lineal y el giro angular se calculan a partir de la diferencia entre lecturas consecutivas de los encoders:
@@ -41,7 +41,7 @@ El desplazamiento lineal y el giro angular se calculan a partir de la diferencia
     AvanceLineal = (DeltaSIzq + DeltaSDer) / 2.0
     GiroAngular  = (DeltaSDer - DeltaSIzq) / DistanciaRuedas
 
-Con RadioRueda = 0.0205 m y DistanciaRuedas = 0.052 m. Este modelo cinemático diferencial se utiliza para actualizar la predicción del filtro de Kalman en cada paso (sabiendo exactamente cuánto avanzó físicamente el robot).
+Con `RadioRueda = 0.0205 m` y `DistanciaRuedas = 0.052 m`. Este modelo cinemático diferencial se utiliza para actualizar la predicción del filtro de Kalman en cada paso (sabiendo exactamente cuánto avanzó físicamente el robot).
 
 ## Filtrado y Fusión Sensorial (Filtro de Kalman)
 
