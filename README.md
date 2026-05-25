@@ -102,14 +102,35 @@ El sistema lleva a cabo un control reactivo por medio de una máquina de estados
 ### Escenario: FACIL
 <img width="437" height="434" alt="image" src="https://github.com/user-attachments/assets/d70b3d72-ec55-4083-9b77-8931e891cc2c" />
 
+#### Análisis de Comportamiento
+
+- Estabilidad del movimiento: Estabilidad general adecuada, con registro de trayectorias en zigzag durante el segmento de retorno. El control proporcional inyecta correcciones diferenciales que no logran suprimir la oscilación transversal acumulada en espacios prolongados.
+
+- Cantidad de giros innecesarios: Presencia de falsos positivos que desencadenan giros evasivos redundantes. Su ocurrencia es marginal y no degrada significativamente el tiempo total de ejecución ni impide la resolución del circuito.
+
+- Evasión funcional con aproximaciones al límite del hardware. Los umbrales de decisión configurados inducen proximidad crítica a la geometría del entorno, derivando en colisiones tangenciales u ocasionales roces. La rutina de retroceso de seguridad interviene tras la colisión, anulando el atasco cinemático y permitiendo la continuidad de la trayectoria.
+
+- Diferencias entre mediciones 
+
 <img width="1189" height="590" alt="image" src="https://github.com/user-attachments/assets/c281891c-06c6-4728-872d-dcf18b3272e4" />
 
 
 ### Escenario: DIFICIL
 <img width="447" height="445" alt="image" src="https://github.com/user-attachments/assets/57dc28b7-a252-4553-9324-73de21ae39f0" />
 
+#### Análisis de Comportamiento
+
+- Estabilidad del movimiento: Oscilación transversal (zigzag) registrada en pasillos de alta estrechez; la trayectoria se completa sin pérdida de rumbo. Desplazamiento lineal mantenido en espacios abiertos. La evaluación del diferencial lateral en intersecciones resulta en la selección de ruta correcta.
+
+- Cantidad de giros innecesarios: Incremento de falsos positivos respecto al escenario de baja complejidad. El reposicionamiento exige secuencias intercaladas de retroceso y avance para la corrección de orientación. Ausencia de bucles espaciales; el vector de navegación hacia el objetivo permanece inalterado tras la corrección.
+
+- Capacidad para evitar colisiones: Registro de aproximación crítica a los muros y colisiones tangenciales. El atasco cinemático se interrumpe mediante la ejecución obligatoria del retroceso de seguridad, aislando el contacto físico y facilitando la continuación de la trayectoria hacia el punto objetivo.
+
+- Diferencias entre mediciones (General):
+
 <img width="1189" height="590" alt="image" src="https://github.com/user-attachments/assets/a1e239a0-507d-422d-8abc-64fda533f042" />
 
+La lectura infrarroja cruda exhibe alta fluctuación errática. El filtro EMA proporciona un suavizado de la señal a expensas de la introducción de latencia. La estimación fusionada del Filtro de Kalman anula el desfase, estabiliza el vector de decisión y soluciona el estancamiento algorítmico en esquinas estructurales.
 
 ## Conclusiones
 Las siguientes conclusiones se deducen a partir de la aplicación de la lógica reactiva y las pruebas que se han hecho en diversos ambientes de simulación:
