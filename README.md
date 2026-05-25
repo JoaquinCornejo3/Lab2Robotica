@@ -104,33 +104,34 @@ El sistema lleva a cabo un control reactivo por medio de una máquina de estados
 
 #### Análisis de Comportamiento
 
-- Estabilidad del movimiento: Estabilidad general adecuada, con registro de trayectorias en zigzag durante el segmento de retorno. El control proporcional inyecta correcciones diferenciales que no logran suprimir la oscilación transversal acumulada en espacios prolongados.
+- **Estabilidad del movimiento:** Estabilidad general adecuada, con registro de trayectorias en zigzag durante el segmento de retorno. El control proporcional inyecta correcciones diferenciales que no logran suprimir la oscilación transversal acumulada en espacios prolongados.
 
-- Cantidad de giros innecesarios: Presencia de falsos positivos que desencadenan giros evasivos redundantes. Su ocurrencia es marginal y no degrada significativamente el tiempo total de ejecución ni impide la resolución del circuito.
+- **Cantidad de giros innecesarios:** Presencia de falsos positivos que desencadenan giros evasivos redundantes. Su ocurrencia es marginal y no degrada significativamente el tiempo total de ejecución ni impide la resolución del circuito.
 
-- Evasión funcional con aproximaciones al límite del hardware. Los umbrales de decisión configurados inducen proximidad crítica a la geometría del entorno, derivando en colisiones tangenciales u ocasionales roces. La rutina de retroceso de seguridad interviene tras la colisión, anulando el atasco cinemático y permitiendo la continuidad de la trayectoria.
+- **Capacidad para evitar colisiones:** Evasión funcional con aproximaciones al límite del hardware. Los umbrales de decisión configurados inducen proximidad crítica a la geometría del entorno, derivando en colisiones tangenciales u ocasionales roces. La rutina de retroceso de seguridad interviene tras la colisión, anulando el atasco cinemático y permitiendo la continuidad de la trayectoria.
 
-- Diferencias entre mediciones 
+- **Diferencias entre mediciones:**
 
 <img width="1189" height="590" alt="image" src="https://github.com/user-attachments/assets/c281891c-06c6-4728-872d-dcf18b3272e4" />
 
+La lectura infrarroja cruda presenta inestabilidad y recortes espurios por reflexión óptica. El filtro EMA estabiliza la señal mediante suavizado, induciendo latencia de fase. El Filtro de Kalman anula este desfase integrando la odometría. La estimación resultante es continua, predictiva e inmune a falsos positivos del hardware.
 
 ### Escenario: DIFICIL
 <img width="447" height="445" alt="image" src="https://github.com/user-attachments/assets/57dc28b7-a252-4553-9324-73de21ae39f0" />
 
 #### Análisis de Comportamiento
 
-- Estabilidad del movimiento: Oscilación transversal (zigzag) registrada en pasillos de alta estrechez; la trayectoria se completa sin pérdida de rumbo. Desplazamiento lineal mantenido en espacios abiertos. La evaluación del diferencial lateral en intersecciones resulta en la selección de ruta correcta.
+- **Estabilidad del movimiento:** Oscilación transversal (zigzag) registrada en pasillos de alta estrechez; la trayectoria se completa sin pérdida de rumbo. Desplazamiento lineal mantenido en espacios abiertos. La evaluación del diferencial lateral en intersecciones resulta en la selección de ruta correcta.
 
-- Cantidad de giros innecesarios: Incremento de falsos positivos respecto al escenario de baja complejidad. El reposicionamiento exige secuencias intercaladas de retroceso y avance para la corrección de orientación. Ausencia de bucles espaciales; el vector de navegación hacia el objetivo permanece inalterado tras la corrección.
+- **Cantidad de giros innecesarios:** Incremento de falsos positivos respecto al escenario de baja complejidad. El reposicionamiento exige secuencias intercaladas de retroceso y avance para la corrección de orientación. Ausencia de bucles espaciales; el vector de navegación hacia el objetivo permanece inalterado tras la corrección.
 
-- Capacidad para evitar colisiones: Registro de aproximación crítica a los muros y colisiones tangenciales. El atasco cinemático se interrumpe mediante la ejecución obligatoria del retroceso de seguridad, aislando el contacto físico y facilitando la continuación de la trayectoria hacia el punto objetivo.
+- **Capacidad para evitar colisiones:** Registro de aproximación crítica a los muros y colisiones tangenciales. El atasco cinemático se interrumpe mediante la ejecución obligatoria del retroceso de seguridad, aislando el contacto físico y facilitando la continuación de la trayectoria hacia el punto objetivo.
 
-- Diferencias entre mediciones (General):
+- **Diferencias entre mediciones:**
 
 <img width="1189" height="590" alt="image" src="https://github.com/user-attachments/assets/a1e239a0-507d-422d-8abc-64fda533f042" />
 
-La lectura infrarroja cruda exhibe alta fluctuación errática. El filtro EMA proporciona un suavizado de la señal a expensas de la introducción de latencia. La estimación fusionada del Filtro de Kalman anula el desfase, estabiliza el vector de decisión y soluciona el estancamiento algorítmico en esquinas estructurales.
+En el entorno dificil, la dispersión óptica se ve agravada por la geometría; en pasillos angostos, las reflexiones cruzadas hacen que la señal infrarroja cruda registre más a menudo caídas y oscilaciones espurias. El filtro EMA elimina la varianza de alta frecuencia, pero su latencia de fase causa un retraso en la detección espacial cuando se hace una aproximación rápida a las esquinas. El Filtro de Kalman soluciona esta debilidad por medio de la integración de la odometría de los encoders como modelo predictivo. La estimación fusionada genera un vector de distancia continuo que prevé la cercanía real sin transmitir el retraso temporal del suavizado, separando la lógica de navegación de los colapsos temporales del hardware.
 
 ## Conclusiones
 Las siguientes conclusiones se deducen a partir de la aplicación de la lógica reactiva y las pruebas que se han hecho en diversos ambientes de simulación:
@@ -143,9 +144,8 @@ Las siguientes conclusiones se deducen a partir de la aplicación de la lógica 
    * **Escenario FÁCIL:** El sistema corroboró su rendimiento en lugares abiertos. La estimación de distancia permaneció estable cerca del límite útil (0.10 m), lo que posibilitó que el E-puck mantuviera un camino suave con cambios de control mínimos.
    * **Escenario DIFíCIL:** La lógica de navegación fue llevada al límite debido a la gran cantidad de obstáculos y pasillos angostos. La lógica de evasión se disparó de manera reiterada debido a la caída continua del parámetro `d_kalman`. El robot pudo sortear embudos y esquinas cerradas sin tambalearse (sin quedarse "atrapado" decidiendo hacia dónde girar) ni colisionar con los pilares, gracias a que la señal se estabilizó antes.
 
-
 ## Instrucciones de Ejecución
-1.  Clonar este repositorio y abrir Webots.
-2.  Cargar el mundo deseado (`facil.wbt` o `dificil.wbt`) desde la interfaz.
-3.  Asegurar que el E-puck tenga asignado el controlador `labone.py`.
-4.  Cargar el mundo deseado y darle play.
+1. Clonar este repositorio y abrir Webots.
+2. Cargar el mundo deseado (`facil.wbt` o `dificil.wbt`) desde la interfaz.
+3. Asegurar que el E-puck tenga asignado el controlador `labone.py`.
+4. Iniciar la simulación (Play).
