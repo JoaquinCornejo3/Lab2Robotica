@@ -17,11 +17,6 @@ estimar la distancia frontal a obstáculos y mejorar la toma de decisiones.
 **Curso:** (ICI450-2) Robotica y sistemas autonomos.
 
 **Paralelo:** 2
-## Instrucciones de Ejecución
-1.  Clonar este repositorio y abrir Webots.
-2.  Cargar el mundo deseado (`facil.wbt` o `dificil.wbt`) desde la interfaz.
-3.  Asegurar que el E-puck tenga asignado el controlador `labone.py`.
-4.  Cargar el mundo deseado y darle play.
 
 ## Descripción del Robot y Sensores
 Se utiliza el robot diferencial **E-puck** equipado con:
@@ -70,3 +65,10 @@ bla bla bla
 
 ## Conclusiones
 bla bla bla
+
+
+## Instrucciones de Ejecución
+1.  Clonar este repositorio y abrir Webots.
+2.  Cargar el mundo deseado (`facil.wbt` o `dificil.wbt`) desde la interfaz.
+3.  Asegurar que el E-puck tenga asignado el controlador `labone.py`.
+4.  Cargar el mundo deseado y darle play.
