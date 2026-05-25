@@ -14,7 +14,7 @@ estimar la distancia frontal a obstáculos y mejorar la toma de decisiones.
 2. Vicente Martinez Estay.
 3. Darío Fuentes Ponce.
 
-**Curso:** (ICI450-2) Robotica y sistemas autonomos.
+**Curso:** (ICI4150-2) Robotica y sistemas autonomos.
 
 **Paralelo:** 2
 
