@@ -55,14 +55,14 @@ Antes de ingresar al filtro de Kalman, los valores crudos de los sensores fronta
 Con `α = 0.3`. Al utilizar este valor de α, el sistema da mayor importancia a las mediciones anteriores que a los cambios bruscos instantáneos. De esta manera, se pueden eliminar fluctuaciones espurias en los datos sin provocar un retraso significativo en la respuesta del sensor.
 
 ### Filtro de Kalman 1D
-El filtro deKalman estima la distancia frontal al obstáculo más cercano, fusionando el modelo de movimiento (odometría) con la medición del sensor filtrado.
+El filtro de Kalman estima la distancia frontal al obstáculo más cercano, fusionando el modelo de movimiento (odometría) con la medición del sensor filtrado.
 
 - Estado: `d_kalman` = distancia estimada al obstáculo (metros).
 
 - Medición: `z_k = min(DistFD_ema, DistFI_ema)` que seria la menor distancia detectada por los sensores frontales filtrados.
 
 #### Etapa de Predicción (Actualización de Tiempo):
-En esta etapa, el filtro "predice" cómo cambió la distancia basándose únicamente en el movimiento del robot. Como el robot avanza (AvanceLineal), se asume que el obstáculo se acerca en esa misma proporción. Simultáneamente, la incertidumbre del sistema (P_pred) aumenta debido al ruido natural del movimiento (Q_kalman). La distancia se limita estrictamente entre 0 y 0.10 m.
+En esta etapa, el filtro "predice" cómo cambió la distancia basándose únicamente en el movimiento del robot. Como el robot avanza, se asume que el obstáculo se acerca en esa misma proporción. Simultáneamente, la incertidumbre del sistema (`P_pred`) aumenta debido al ruido natural del movimiento. La distancia se limita estrictamente entre 0 y 0.10 m.
 
 ```
 DeltaD_k = -AvanceLineal
@@ -70,7 +70,7 @@ d_pred = d_kalman + DeltaD_k
 d_pred = max(0.0, min(d_pred, 0.10))
 P_pred = P_kalman + Q_kalman
 ```
-Luego se calcul la ganancia de kalman, que se define como `K_k = P_pred / (P_pred + R_kalman)`.
+Luego se calcula la ganancia de kalman, que se define como `K_k = P_pred / (P_pred + R_kalman)`.
 
 #### Etapa de Corrección (Actualización de Medición):
 En esta etapa, la predicción anterior se corrige utilizando la lectura real del sensor . Si el sensor es muy ruidoso, el filtro confiará más en la predicción; si la predicción es incierta, confiará más en el sensor. Finalmente, la incertidumbre se reduce tras incorporar el nuevo dato.
