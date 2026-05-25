@@ -47,10 +47,44 @@ Con RadioRueda = 0.0205 m y DistanciaRuedas = 0.052 m. Este modelo cinemático d
 
 <img width="1389" height="989" alt="image" src="https://github.com/user-attachments/assets/0c5c6b47-109b-42cd-b68c-8a5e8584dd1b" />
 
+### Filtro EMA (Media Móvil Exponencial)
+Antes de ingresar al filtro de Kalman, los valores crudos de los sensores frontales se suavizan con un filtro EMA para mitigar el ruido:
 
-La necesidad y efectividad del procesamiento avanzado se evidencia en el gráfico inferior (Distancia al Obstáculo). Mientras que la conversión directa de la señal cruda a metros produce caídas repentinas e irreales de distancia en el segundo 20.5 (llegando a marcar $\sim0.07$ m de golpe), **el Filtro de Kalman logra una estabilización óptima**.
+`y[k] = α · x[k] + (1 − α) · y[k−1]`
 
-Al integrar la predicción limpia de la odometría con la corrección ponderada de los sensores, la estimación de Kalman traza una trayectoria robusta y segura ($\sim0.08$ m), rechazando las lecturas falsas extremas del sensor crudo y permitiendo que la lógica reactiva tome decisiones de giro precisas sin oscilaciones.
+Con `α = 0.3`. Al utilizar este valor de α, el sistema da mayor importancia a las mediciones anteriores que a los cambios bruscos instantáneos. De esta manera, se pueden eliminar fluctuaciones espurias en los datos sin provocar un retraso significativo en la respuesta del sensor.
+
+### Filtro de Kalman 1D
+El filtro deKalman estima la distancia frontal al obstáculo más cercano, fusionando el modelo de movimiento (odometría) con la medición del sensor filtrado.
+
+- Estado: `d_kalman` = distancia estimada al obstáculo (metros).
+
+- Medición: `z_k = min(DistFD_ema, DistFI_ema)` que seria la menor distancia detectada por los sensores frontales filtrados.
+
+#### Etapa de Predicción (Actualización de Tiempo):
+El obstáculo se acerca en proporción al avance del robot. La distancia se limita entre 0 y 0.10 m.
+
+```
+DeltaD_k = -AvanceLineal
+d_pred = d_kalman + DeltaD_k
+d_pred = max(0.0, min(d_pred, 0.10))
+P_pred = P_kalman + Q_kalman
+```
+luego a considerar, la ganancia de kalman se define como `K_k = P_pred / (P_pred + R_kalman)`.
+
+#### Etapa de Corrección (Actualización de Medición):
+```
+d_kalman = d_pred + K_k * (z_k - d_pred)
+d_kalman = max(0.0, min(d_kalman, 0.10))
+P_kalman = (1.0 - K_k) * P_pred
+```
+| Parámetro | Valor | Significado|
+| :--- | :---: | ---: |
+Q_kalman | 0.0001| Ruido de proceso (muy baja incertidumbre en la odometría).
+R_kalman | 0.0015 | Ruido de medición (incertidumbre del sensor IR convertido a metros).
+d_kalman (Inicial) | 0.10 m | Estado inicial (se asume 10 cm libres al frente).
+P_kalman (Inicial) | 1.0 | Covarianza inicial (alta incertidumbre al iniciar).
+
 
 ## Lógica de Navegación Reactiva
 bla bla bla
