@@ -107,7 +107,15 @@ El sistema lleva a cabo un control reactivo por medio de una máquina de estados
 
 
 ## Conclusiones
-bla bla bla
+Las siguientes conclusiones se deducen a partir de la aplicación de la lógica reactiva y las pruebas que se han hecho en diversos ambientes de simulación:
+
+1. **Eficacia de la fusión sensorial (filtro de Kalman):** La aplicación del filtro de Kalman unidimensional se mostró como el elemento más efectivo para mantener estable la navegación. El sistema fue capaz de calcular la distancia real hacia los obstáculos (`d_kalman`) de forma óptima al combinar la predicción del modelo cinemático (odometría) con la corrección de los sensores infrarrojos. Esto hizo posible atenuar la no linealidad y las súbitas crecidas de ruido en las lecturas sin procesar, evitando que el robot diera giros bruscos o erráticos debido a falsos positivos.
+
+2. **Ventajas frente al Filtro Simple (EMA):** Si bien el Filtro de Media Móvil Exponencial cumplió su función de pre-procesar y suavizar la señal de entrada, su naturaleza matemática introduce un leve retraso en la respuesta frente a obstáculos repentinos. El filtro de Kalman superó esta limitación al anticipar el acercamiento físico del robot mediante la variable `AvanceLineal`, logrando una reacción casi en tiempo real indispensable para evitar colisiones.
+
+3. **Adaptabilidad en situaciones de diferente nivel de complejidad:**
+   * **Escenario FÁCIL:** El sistema corroboró su rendimiento en lugares abiertos. La estimación de distancia permaneció estable cerca del límite útil (0.10 m), lo que posibilitó que el E-puck mantuviera un camino suave con cambios de control mínimos.
+   * **Escenario DIFíCIL:** La lógica de navegación fue llevada al límite debido a la gran cantidad de obstáculos y pasillos angostos. La lógica de evasión se disparó de manera reiterada debido a la caída continua del parámetro `d_kalman`. El robot pudo sortear embudos y esquinas cerradas sin tambalearse (sin quedarse "atrapado" decidiendo hacia dónde girar) ni colisionar con los pilares, gracias a que la señal se estabilizó antes.
 
 
 ## Instrucciones de Ejecución
