@@ -90,7 +90,13 @@ P_kalman (Inicial) | 1.0 | Covarianza inicial (alta incertidumbre al iniciar).
 
 
 ## Lógica de Navegación Reactiva
-bla bla bla
+El sistema lleva a cabo un control reactivo por medio de una máquina de estados finitos implícita que se basa en umbrales de distancia y odometría.
+
+- Avance y Centrado Proporcional: En lugares sin obstáculos frontales, la tracción funciona al 75% de la velocidad máxima. Para calcular el error de posición transversal, se sustraen las mediciones máximas de los sensores laterales izquierdo y derecho. Para inyectar un diferencial de velocidad entre los motores y mantener el chasis a la misma distancia de las paredes, se emplea un control proporcional (Kp = 0.005). Para magnitudes de error menores a 150 unidades crudas, aplica una banda muerta que elimina las oscilaciones de corrección en trayectorias rectas.
+
+- Evasión de Obstáculos: Se activa cuando hay un bloqueo en el vector frontal (cuando la distancia de Kalman es menor a 0.08 m o las lecturas diagonales son más de 600 unidades). La amplitud de la amenaza en los dos lados laterales es comparada por el algoritmo, que luego orienta la rotación hacia el vector con mayor despeje. La maniobra de evasión funciona en circuito cerrado, incorporando la velocidad angular cinemática. La rotación se mantiene de manera continua hasta que se acumula un giro absoluto de π/2 radianes para obstrucciones estándar, o de π/3 radianes en caso de una evaluación de peligro crítico (cuando la distancia es menor a 0.05 m). Utiliza factores multiplicadores asimétricos para realizar un giro dinámico con radio de curvatura.
+
+- Retroceso de Seguridad: Una vez ha terminado el arco odómetrico de evasión, el robot impone una traslación inversa simétrica a velocidad media durante 10 iteraciones consecutivas del bucle de control. Esta rutina elimina la inercia de rotación, elimina los bloqueos cinemáticos por fricción lateral y restablece el volumen espacial de seguridad antes de iniciar nuevamente el movimiento hacia adelante.
 
 ## Escenarios de Prueba y Resultados
 ### Escenario: FACIL
