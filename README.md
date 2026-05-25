@@ -19,9 +19,9 @@ estimar la distancia frontal a obstáculos y mejorar la toma de decisiones.
 **Paralelo:** 2
 ## Instrucciones de Ejecución
 1.  Clonar este repositorio y abrir Webots.
-2.  Cargar el mundo deseado (`facil.wbt`, `laboratorio2.wbt` o `dificil.wbt`) desde la interfaz.
+2.  Cargar el mundo deseado (`facil.wbt` o `dificil.wbt`) desde la interfaz.
 3.  Asegurar que el E-puck tenga asignado el controlador `labone.py`.
-4.  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA.
+4.  Cargar el mundo deseado y darle play.
 
 ## Descripción del Robot y Sensores
 Se utiliza el robot diferencial **E-puck** equipado con:
@@ -61,39 +61,12 @@ Al integrar la predicción limpia de la odometría con la corrección ponderada 
 bla bla bla
 
 ## Escenarios de Prueba y Resultados
-bla bla bla
+### Escenario: FACIL
+<img width="437" height="434" alt="image" src="https://github.com/user-attachments/assets/d70b3d72-ec55-4083-9b77-8931e891cc2c" />
+
+### Escenario: DIFICIL
+<img width="447" height="445" alt="image" src="https://github.com/user-attachments/assets/57dc28b7-a252-4553-9324-73de21ae39f0" />
+
 
 ## Conclusiones
 bla bla bla
-
-*(BORRAR) lo de abajo*
-
-Entrega - Repositorio GitHub
-La entrega del laboratorio debe realizarse mediante un repositorio en
-GitHub, público o compartido con el docente.
-El repositorio debe incluir:
- * el código fuente completo del controlador del robot,
- * los archivos necesarios para ejecutar la simulación,
- * un archivo README.md
-
- El archivo README.md deberá actuar como informe de desarrollo del laboratorio. Por tanto, no solo debe incluir instrucciones de ejecución, sino
-también la descripción de la solución implementada, el análisis de señales, la
-aplicación de filtros, la estimación mediante filtro de Kalman, los resultados
-obtenidos y las conclusiones del grupo.
-
-
-##Contenido mínimo del README.md
-* ✓ nombre del laboratorio e integrantes del grupo 
-* ✓ objetivo del trabajo
-* descripción del robot y sensores utilizados,
-* frecuencia de muestreo empleada
-* análisis de las señales registradas,
-* estimación del avance mediante encoders,
-* filtro simple aplicado,
-* implementación del filtro de kalman
-* descripción de las etapas de predicción y corrección
-* lógica de navegación reactiva implementada,
-* gráficos de señales crudas, filtradas y estimadas,
-* resultados obtenidos en los escenarios de prueba,
-* análisis final y conclusiones,
-* intrucciones para ejecutar la simulación
