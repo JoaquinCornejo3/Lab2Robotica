@@ -102,8 +102,13 @@ El sistema lleva a cabo un control reactivo por medio de una máquina de estados
 ### Escenario: FACIL
 <img width="437" height="434" alt="image" src="https://github.com/user-attachments/assets/d70b3d72-ec55-4083-9b77-8931e891cc2c" />
 
+<img width="1189" height="590" alt="image" src="https://github.com/user-attachments/assets/c281891c-06c6-4728-872d-dcf18b3272e4" />
+
+
 ### Escenario: DIFICIL
 <img width="447" height="445" alt="image" src="https://github.com/user-attachments/assets/57dc28b7-a252-4553-9324-73de21ae39f0" />
+
+<img width="1189" height="590" alt="image" src="https://github.com/user-attachments/assets/a1e239a0-507d-422d-8abc-64fda533f042" />
 
 
 ## Conclusiones
